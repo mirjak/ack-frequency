@@ -1589,15 +1589,19 @@ A sender can accomplish this by sending an IMMEDIATE_ACK frame once per
 round-trip time (RTT), or it can set the Ack-Eliciting Threshold and
 Request Max Ack Delay values to be no more than a congestion window and an
 estimated RTT, respectively.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
-<p id="section-9.1-2">A congestion controller that is congestion window limited relies upon receiving
+<p id="section-9.1-2">Note that it's possible the RTT is smaller than the receiver's timer granularity,
+as communicated via the 'min_ack_delay' transport parameter, preventing the
+receiver from sending an acknowledgment every RTT in time.  In these cases,
+'Ignore Order' can be harmful, because it delays fast loss detection.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
+<p id="section-9.1-3">A congestion controller that is congestion window limited relies upon receiving
 acknowledgements to send additional data into the network.  An increase in
 acknowledgement delay increases the delay in sending data, which can reduce the
 achieved bandwidth.  Congestion window growth can also depend upon receiving
 acknowledgements, such as in slow start (<span><a href="https://rfc-editor.org/rfc/rfc9002#section-7.3.1" class="relref">Section 7.3.1</a> of [<a href="#QUIC-RECOVERY" class="xref">QUIC-RECOVERY</a>]</span>),
-so delaying acknowledgements can delay the increase in congestion window.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
-<p id="section-9.1-3">Window-based congestion controllers, such as the one defined in <span>[<a href="#QUIC-RECOVERY" class="xref">QUIC-RECOVERY</a>]</span>,
+so delaying acknowledgements can delay the increase in congestion window.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
+<p id="section-9.1-4">Window-based congestion controllers, such as the one defined in <span>[<a href="#QUIC-RECOVERY" class="xref">QUIC-RECOVERY</a>]</span>,
 rely on receipt of acknowledgments to send additional data into the network,
-so performance is degraded if acknowledgments are delayed excessively.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
+so performance is degraded if acknowledgments are delayed excessively.<a href="#section-9.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="burst-mitigation">
