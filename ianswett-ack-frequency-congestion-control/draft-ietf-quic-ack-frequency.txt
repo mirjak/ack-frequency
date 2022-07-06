@@ -5,8 +5,8 @@
 QUIC                                                          J. Iyengar
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                                I. Swett
-Expires: 28 December 2022                                         Google
-                                                            26 June 2022
+Expires: 7 January 2023                                           Google
+                                                             6 July 2022
 
 
                      QUIC Acknowledgement Frequency
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 December 2022.
+   This Internet-Draft will expire on 7 January 2023.
 
 Copyright Notice
 
