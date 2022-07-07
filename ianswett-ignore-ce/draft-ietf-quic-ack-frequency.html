@@ -1530,7 +1530,7 @@ congestion controllers that mark more frequently than classic ECN <span>[<a href
 has an <code>Ignore CE</code> value of <code>true</code> (0x01), receipt of a CE marked packet
 SHOULD NOT cause an endpoint to send an immediate acknowledgement.  The endpoint
 still sends an immediate acknowledgement if it would have for a non CE marked
-packet.  If an immediate acknowledgement is not send, the CE marks are reported
+packet.  If an immediate acknowledgement is not sent, the CE marks are reported
 in the next acknowledgement.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
 <p id="section-7.2-4">The Ignore-CE bit SHOULD NOT be set if the sender sets ECT(1) in its outgoing
 packets, such as with L4S, because it delays the congestion controller's ability
