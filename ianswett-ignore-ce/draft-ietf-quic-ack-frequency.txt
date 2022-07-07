@@ -5,8 +5,8 @@
 QUIC                                                          J. Iyengar
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                                I. Swett
-Expires: 7 January 2023                                           Google
-                                                             6 July 2022
+Expires: 8 January 2023                                           Google
+                                                             7 July 2022
 
 
                      QUIC Acknowledgement Frequency
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 January 2023.
+   This Internet-Draft will expire on 8 January 2023.
 
 Copyright Notice
 
@@ -387,9 +387,9 @@ Table of Contents
    immediate acknowledgement is not send, the CE marks are reported in
    the next acknowledgement.
 
-   The Ignore-CE bit SHOULD NOT be set if ECT(1) is negotiated with
-   DCTCP [RFC8257] or L4S, because it delays the congestion controller's
-   ability to quickly respond to congestion.
+   The Ignore-CE bit SHOULD NOT be set if the sender sets ECT(1) in its
+   outgoing packets, such as with L4S, because it delays the congestion
+   controller's ability to quickly respond to congestion.
 
 7.3.  Batch Processing of Packets
 
