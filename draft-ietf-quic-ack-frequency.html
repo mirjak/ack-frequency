@@ -1526,6 +1526,15 @@ received and the previously received packet was not marked CE.<a href="#section-
 reducing the ACK rate compared to <span><a href="https://rfc-editor.org/rfc/rfc9000#section-13.2.1" class="relref">Section 13.2.1</a> of [<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span> during
 extreme congestion or when peers are using DCTCP <span>[<a href="#RFC8257" class="xref">RFC8257</a>]</span> or other
 congestion controllers that mark more frequently than classic ECN <span>[<a href="#RFC3168" class="xref">RFC3168</a>]</span>.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.2-3">If the most recent ACK_FREQUENCY frame an endpoint has received from the peer
+has an <code>Ignore CE</code> value of <code>true</code> (0x01), receipt of a CE marked packet
+SHOULD NOT cause an endpoint to send an immediate acknowledgement.  The endpoint
+still sends an immediate acknowledgement if it would have for a non CE marked
+packet.  If an immediate acknowledgement is not sent, the CE marks are reported
+in the next acknowledgement.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
+<p id="section-7.2-4">The Ignore-CE bit SHOULD NOT be set if the sender sets ECT(1) in its outgoing
+packets, such as with L4S, because it delays the congestion controller's ability
+to quickly respond to congestion.<a href="#section-7.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="batch">
