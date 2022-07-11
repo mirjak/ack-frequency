@@ -5,8 +5,8 @@
 QUIC                                                          J. Iyengar
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                                I. Swett
-Expires: 28 December 2022                                         Google
-                                                            26 June 2022
+Expires: 12 January 2023                                          Google
+                                                            11 July 2022
 
 
                      QUIC Acknowledgement Frequency
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 December 2022.
+   This Internet-Draft will expire on 12 January 2023.
 
 Copyright Notice
 
@@ -414,9 +414,12 @@ Table of Contents
    ACK-Eliciting Threshold, an endpoint can expect that the peer will
    not need to wait for its max_ack_delay period before sending an
    acknowledgement.  In such cases, the endpoint MAY therefore exclude
-   the peer's 'max_ack_delay' from its PTO calculation.  Note that this
-   optimization requires some care in implementation, since it can cause
-   premature PTOs under packet loss when ignore_order is enabled.
+   the peer's 'max_ack_delay' from its PTO calculation.  When Ignore
+   Order is enabled and loss causes the peer to not receive enough
+   packets to trigger an immediate acknowledgement, the receiver will
+   wait 'max_ack_delay', increasing the chances of a premature PTO.
+   Therefore, if Ignore Order is enabled, the PTO MUST be larger than
+   the peer's 'max_ack_delay'.
 
 9.  Determining Acknowledgement Frequency
 
