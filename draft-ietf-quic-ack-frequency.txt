@@ -5,8 +5,8 @@
 QUIC                                                          J. Iyengar
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                                I. Swett
-Expires: 12 January 2023                                          Google
-                                                            11 July 2022
+Expires: 28 January 2023                                          Google
+                                                            27 July 2022
 
 
                      QUIC Acknowledgement Frequency
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 January 2023.
+   This Internet-Draft will expire on 28 January 2023.
 
 Copyright Notice
 
@@ -130,12 +130,15 @@ Table of Contents
       intensive, and reducing acknowledgement frequency reduces this
       cost at a data sender.
 
-   *  Severely asymmetric link technologies, such as DOCSIS, LTE, and
-      satellite links, connection throughput in the data direction
-      becomes constrained when the reverse bandwidth is filled by
+   *  For severely asymmetric link technologies, such as DOCSIS, LTE,
+      and satellite links, connection throughput in the forward path can
+      become constrained when the reverse path is filled by
       acknowledgment packets.  When traversing such links, reducing the
-      number of acknowledgments allows connection throughput to scale
-      much further.
+      number of acknowledgments can achieve higher connection
+      throughput.
+
+   *  The rate of acknowledgment packets can impact link efficiency,
+      including transmission opportunities or battery life.
 
    As discussed in Section 9 however, there can be undesirable
    consequences to congestion control and loss recovery if a receiver
