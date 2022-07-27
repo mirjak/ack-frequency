@@ -5,8 +5,8 @@
 QUIC                                                          J. Iyengar
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                                I. Swett
-Expires: 16 December 2022                                         Google
-                                                            14 June 2022
+Expires: 28 January 2023                                          Google
+                                                            27 July 2022
 
 
                      QUIC Acknowledgement Frequency
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 December 2022.
+   This Internet-Draft will expire on 28 January 2023.
 
 Copyright Notice
 
@@ -130,12 +130,15 @@ Table of Contents
       intensive, and reducing acknowledgement frequency reduces this
       cost at a data sender.
 
-   *  Severely asymmetric link technologies, such as DOCSIS, LTE, and
-      satellite links, connection throughput in the data direction
-      becomes constrained when the reverse bandwidth is filled by
+   *  For severely asymmetric link technologies, such as DOCSIS, LTE,
+      and satellite links, connection throughput in the forward path can
+      become constrained when the reverse path is filled by
       acknowledgment packets.  When traversing such links, reducing the
-      number of acknowledgments allows connection throughput to scale
-      much further.
+      number of acknowledgments can achieve higher connection
+      throughput.
+
+   *  The rate of acknowledgment packets can impact link efficiency,
+      including transmission opportunities or battery life.
 
    As discussed in Section 9 however, there can be undesirable
    consequences to congestion control and loss recovery if a receiver
@@ -379,6 +382,18 @@ Table of Contents
    DCTCP [RFC8257] or other congestion controllers that mark more
    frequently than classic ECN [RFC3168].
 
+   If the most recent ACK_FREQUENCY frame an endpoint has received from
+   the peer has an Ignore CE value of true (0x01), receipt of a CE
+   marked packet SHOULD NOT cause an endpoint to send an immediate
+   acknowledgement.  The endpoint still sends an immediate
+   acknowledgement if it would have for a non CE marked packet.  If an
+   immediate acknowledgement is not sent, the CE marks are reported in
+   the next acknowledgement.
+
+   The Ignore-CE bit SHOULD NOT be set if the sender sets ECT(1) in its
+   outgoing packets, such as with L4S, because it delays the congestion
+   controller's ability to quickly respond to congestion.
+
 7.3.  Batch Processing of Packets
 
    For performance reasons, an endpoint can receive incoming packets
@@ -406,9 +421,9 @@ Table of Contents
 
    While it is expected that endpoints will have only one ACK_FREQUENCY
    frame in flight at any given time, this extension does not prohibit
-   having more than one in flight.  Generally, when using max_ack_delay
-   for PTO computations, endpoints MUST use the maximum of the current
-   value and all those in flight.
+   having more than one in flight.  When using max_ack_delay for PTO
+   computations, endpoints MUST use the maximum of the current value and
+   all those in flight.
 
    When the number of in-flight ack-eliciting packets is larger than the
    ACK-Eliciting Threshold, an endpoint can expect that the peer will
