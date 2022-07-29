@@ -1036,7 +1036,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Iyengar &amp; Swett</td>
-<td class="center">Expires 28 January 2023</td>
+<td class="center">Expires 30 January 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1049,12 +1049,12 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-quic-ack-frequency-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-07-27" class="published">27 July 2022</time>
+<time datetime="2022-07-29" class="published">29 July 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-01-28">28 January 2023</time></dd>
+<dd class="expires"><time datetime="2023-01-30">30 January 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1104,7 +1104,7 @@ code and issues list for this draft can be found at
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 January 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 January 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1344,8 +1344,7 @@ ACK_FREQUENCY Frame {
   Sequence Number (i),
   Ack-Eliciting Threshold (i),
   Request Max Ack Delay (i),
-  Reserved (6),
-  Ignore CE (1),
+  Reserved (7),
   Ignore Order (1)
 }
 </pre><a href="#section-4-2" class="pilcrow">¶</a>
@@ -1388,20 +1387,12 @@ field MUST be 0x00. Receipt of any other value MUST be treated as a
 connection error of type FRAME_ENCODING_ERROR.<a href="#section-4-4.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-4-4.9">Ignore CE:</dt>
+<dt id="section-4-4.9">Ignore Order:</dt>
         <dd style="margin-left: 1.5em" id="section-4-4.10">
           <p id="section-4-4.10.1">A 1-bit field representing a boolean truth value. This field is
 set to <code>true</code> by an endpoint that does not wish to receive an immediate
-acknowledgement when the peer receives CE-marked packets (<a href="#out-of-order" class="xref">Section 7.1</a>).
-0 represents 'false' and 1 represents 'true'.<a href="#section-4-4.10.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-4-4.11">Ignore Order:</dt>
-        <dd style="margin-left: 1.5em" id="section-4-4.12">
-          <p id="section-4-4.12.1">A 1-bit field representing a boolean truth value. This field is
-set to <code>true</code> by an endpoint that does not wish to receive an immediate
 acknowledgement when the peer receives a packet out of order
-(<a href="#out-of-order" class="xref">Section 7.1</a>). 0 represents 'false' and 1 represents 'true'.<a href="#section-4-4.12.1" class="pilcrow">¶</a></p>
+(<a href="#out-of-order" class="xref">Section 7.1</a>). 0 represents 'false' and 1 represents 'true'.<a href="#section-4-4.10.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1534,15 +1525,6 @@ received and the previously received packet was not marked CE.<a href="#section-
 reducing the ACK rate compared to <span><a href="https://rfc-editor.org/rfc/rfc9000#section-13.2.1" class="relref">Section 13.2.1</a> of [<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span> during
 extreme congestion or when peers are using DCTCP <span>[<a href="#RFC8257" class="xref">RFC8257</a>]</span> or other
 congestion controllers that mark more frequently than classic ECN <span>[<a href="#RFC3168" class="xref">RFC3168</a>]</span>.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
-<p id="section-7.2-3">If the most recent ACK_FREQUENCY frame an endpoint has received from the peer
-has an <code>Ignore CE</code> value of <code>true</code> (0x01), receipt of a CE marked packet
-SHOULD NOT cause an endpoint to send an immediate acknowledgement.  The endpoint
-still sends an immediate acknowledgement if it would have for a non CE marked
-packet.  If an immediate acknowledgement is not sent, the CE marks are reported
-in the next acknowledgement.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
-<p id="section-7.2-4">The Ignore-CE bit SHOULD NOT be set if the sender sets ECT(1) in its outgoing
-packets, such as with L4S, because it delays the congestion controller's ability
-to quickly respond to congestion.<a href="#section-7.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="batch">
